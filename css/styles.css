@@ -1,0 +1,39 @@
+ body{
+            background:#eef7fc;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .encabezado{
+            background:#5dade2;
+            color:white;
+            padding:50px 0;
+        }
+
+        .card{
+            border:none;
+            border-radius:12px;
+            box-shadow:0 2px 10px rgba(0,0,0,.08);
+        }
+        .card h4{
+            color:#3498db;
+            font-weight:600;
+        }
+        .btn-primary{
+            background:#5dade2;
+            border:none;
+        }
+        .btn-primary:hover{
+            background:#3498db;
+        }
+        .btn-outline-primary{
+            border-color:#5dade2;
+            color:#3498db;
+        }
+        .btn-outline-primary:hover{
+            background:#5dade2;
+            border-color:#5dade2;
+        }
+        footer{
+            color:#6c757d;
+            padding:30px;
+            text-align:center;
+        }

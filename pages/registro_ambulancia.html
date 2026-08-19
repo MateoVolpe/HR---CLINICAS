@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar Ambulancia</title>
+</head>
+
+<body>
+
+    <h1>Registrar Ambulancia</h1>
+
+    <form id="formulario">
+
+        <label for="matricula">Matrícula:</label>
+        <input type="text" id="matricula" name="matricula" required>
+
+        <br><br>
+
+        <label for="modelo">Modelo:</label>
+        <input type="text" id="modelo" name="modelo" required>
+
+        <br><br>
+
+        <label for="estado">Estado:</label>
+        <select id="estado" name="estado" required>
+            <option value="">Seleccionar</option>
+            <option value="Disponible">Disponible</option>
+            <option value="En traslado">En traslado</option>
+            <option value="Mantenimiento">Mantenimiento</option>
+        </select>
+
+        <br><br>
+
+        <button type="submit" id="boton">
+            Registrar ambulancia
+        </button>
+
+    </form>
+
+    <br>
+
+    <a href="../index.html">Volver al inicio</a>
+
+    <script src="../js/registrar_ambulancia.js"></script>
+
+</body>
+
+</html>

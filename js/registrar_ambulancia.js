@@ -20,10 +20,12 @@ boton.addEventListener('click', async (e) => {
 
     let texto = await respuesta.text();
 
+
     if (texto.trim() === 'ok') {
         alert('Ambulancia guardada correctamente');
     } else {
         alert('Error al guardar la ambulancia');
+            
     }
 
 });

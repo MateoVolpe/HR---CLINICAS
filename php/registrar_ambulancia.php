@@ -1,9 +1,9 @@
 <?php
 require_once 'conexion.php';
 
-$apellido = $_POST['matricula'];
-$usuario = $_POST['modelo'];
-$pass = $_POST['estado'];
+$matricula = $_POST['matricula'];
+$modelo = $_POST['modelo'];
+$estado = $_POST['estado'];
 
 
 

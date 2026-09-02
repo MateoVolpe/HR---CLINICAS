@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualizar ambulancia</title>
+</head>
+
+<body>
+
+    <form id="formulario">
+
+        <label for="matricula">
+            Matrícula de la ambulancia que desea actualizar:
+        </label>
+
+        <input
+            type="text"
+            id="matricula"
+            placeholder="Ej: ABC123"
+            required
+        >
+
+        <p>Datos a actualizar:</p>
+
+        <label for="marcamodelo">Marca y modelo:</label>
+
+        <input
+            type="text"
+            id="marcamodelo"
+            placeholder="Ej: Mercedes A01"
+        >
+
+        <br><br>
+
+        <label for="estado">Estado de la ambulancia:</label>
+
+        <select id="estado" required>
+            <option value="1">Disponible</option>
+            <option value="2">En traslado</option>
+            <option value="3">Mantenimiento</option>
+        </select>
+
+        <br><br>
+
+        <button type="button" id="boton">
+            Actualizar ambulancia
+        </button>
+
+    </form>
+
+    <div id="respuesta"></div>
+
+    <script src="actualizarambulancia.js"></script>
+
+</body>
+</html>

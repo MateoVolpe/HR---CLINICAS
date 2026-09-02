@@ -35,6 +35,6 @@ $_SESSION['funcionario'] = [
     'cargo' => $funcionario['cargo']
 ];
 
-header('Location: ../pages/ambulancias.html');
+header('Location: ../pages/bienvenido_funcionario.html');
 exit;
 ?>

@@ -1,13 +1,13 @@
 <?php
 
-require_once '../conexion.php';
+require_once 'conexion.php';
 
 $matricula = $_POST['matricula'] ?? '';
-$marcamodelo = $_POST['marcamodelo'] ?? '';
+$modelo = $_POST['modelo'] ?? '';
 $id_estado = $_POST['id_estado'] ?? '';
 
 $matricula = trim($matricula);
-$marcamodelo = trim($marcamodelo);
+$modelo = trim($modelo);
 $id_estado = intval($id_estado);
 
 if ($matricula == '') {
@@ -15,13 +15,13 @@ if ($matricula == '') {
     exit;
 }
 
-if ($marcamodelo == '' && $id_estado == 0) {
-    echo "No se ingresaron datos para actualizar.";
+if ($modelo == '' && $id_estado == 0) {
+    echo "No se ingresaron datos par a actualizar.";
     exit;
 }
 
 
-if ($marcamodelo != '' && $id_estado > 0) {
+if ($modelo != '' && $id_estado > 0) {
 
     $stmt = $con->prepare("
         UPDATE ambulancias
@@ -31,14 +31,14 @@ if ($marcamodelo != '' && $id_estado > 0) {
 
     $stmt->bind_param(
         "sis",
-        $marcamodelo,
+        $modelo,
         $id_estado,
         $matricula
     );
 
 }
 
-else if ($marcamodelo != '') {
+else if ($modelo != '') {
 
     $stmt = $con->prepare("
         UPDATE ambulancias
@@ -48,7 +48,7 @@ else if ($marcamodelo != '') {
 
     $stmt->bind_param(
         "ss",
-        $marcamodelo,
+        $modelo,
         $matricula
     );
 

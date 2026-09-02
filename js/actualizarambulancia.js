@@ -1,5 +1,5 @@
 const matricula = document.getElementById("matricula");
-const marcamodelo = document.getElementById("marcamodelo");
+const modelo = document.getElementById("modelo");
 const estado = document.getElementById("estado");
 const boton = document.getElementById("boton");
 const divRespuesta = document.getElementById("respuesta");
@@ -11,12 +11,12 @@ boton.addEventListener("click", async (e) => {
     let doc = new FormData();
 
     doc.append("matricula", matricula.value.trim());
-    doc.append("marcamodelo", marcamodelo.value.trim());
+    doc.append("modelo", modelo.value.trim());
     doc.append("id_estado", estado.value);
 
     try {
 
-        const respuesta = await fetch("actualizarambulancia.php", {
+        const respuesta = await fetch("../php/actualizarambulancia.php", {
             method: "POST",
             body: doc
         });

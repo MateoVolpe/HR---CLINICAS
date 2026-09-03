@@ -3,55 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Actualizar ambulancia</title>
+    <title>Actualizar ambulancia | Hospital de Clínicas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
 </head>
-
 <body>
+    <main class="container py-5" style="max-width: 680px;">
+        <div class="card p-4 p-md-5">
+            <h1 class="h2 mb-2" style="color:#2878a8;">Actualizar ambulancia</h1>
+            <p class="text-muted mb-4">Modifique los datos de una ambulancia registrada.</p>
 
-    <form id="formulario">
-
-        <label for="matricula">
-            Matrícula de la ambulancia que desea actualizar:
-        </label>
-
-        <input
-            type="text"
-            id="matricula"
-            placeholder="Ej: ABC123"
-            required
-        >
-
-        <p>Datos a actualizar:</p>
-
-        <label for="modelo">Marca y modelo:</label>
-
-        <input
-            type="text"
-            id="modelo"
-            placeholder="Ej: Mercedes A01"
-        >
-
-        <br><br>
-
-        <label for="estado">Estado de la ambulancia:</label>
-
-        <select id="estado" required>
-            <option value="1">Disponible</option>
-            <option value="2">En traslado</option>
-            <option value="3">Mantenimiento</option>
-        </select>
-
-        <br><br>
-
-        <button type="button" id="boton">
-            Actualizar ambulancia
-        </button>
-
-    </form>
-
-    <div id="respuesta"></div>
+            <form id="formulario">
+                <div class="mb-3">
+                    <label class="form-label" for="matricula">Matrícula de la ambulancia</label>
+                    <input class="form-control" type="text" id="matricula" placeholder="Ej: ABC123" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="modelo">Marca y modelo</label>
+                    <input class="form-control" type="text" id="modelo" placeholder="Ej: Mercedes A01">
+                </div>
+                <div class="mb-4">
+                    <label class="form-label" for="estado">Estado de la ambulancia</label>
+                    <select class="form-select" id="estado" required>
+                        <option value="1">Disponible</option>
+                        <option value="2">En traslado</option>
+                        <option value="3">Mantenimiento</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary" type="button" id="boton">Actualizar ambulancia</button>
+                <a class="btn btn-link" href="bienvenido_funcionario.html">Volver al panel</a>
+            </form>
+            <div id="respuesta" class="alert alert-info mt-4 mb-0" role="status" aria-live="polite"></div>
+        </div>
+    </main>
 
     <script src="../js/actualizarambulancia.js"></script>
-
 </body>
 </html>

@@ -1,32 +1,47 @@
 <?php
-session_start();
 require_once 'conexion.php';
+session_start();
 
+// Indica que la respuesta del archivo sera JSON.
+header('Content-Type: application/json; charset=utf-8');
+
+// 1. Obtener datos enviados desde el formulario
 $usuario = $_POST['usuario'] ?? '';
-$password = $_POST['password'] ?? '';
+$contrasenia = $_POST['contrasenia'] ?? $_POST['password'] ?? '';
 
-if ($usuario === '' || $password === '') {
-    header('Location: ../pages/login_funcionario.html?error=datos');
+if ($usuario === '' || $contrasenia === '') {
+    echo json_encode(['error' => 'Complete usuario y contraseña']);
     exit;
 }
 
-$consulta = $con->prepare(
-    'SELECT id_funcionario, nombre, apellido, usuario, cargo
+// 2. Buscar el funcionario activo en la base de datos
+$stmt = $con->prepare(
+    'SELECT id_funcionario, nombre, apellido, usuario, contrasena, cargo
      FROM funcionarios
-     WHERE usuario = ? AND contrasena = ? AND estado = \'Activo\'
+     WHERE usuario = ? AND estado = \'Activo\'
      LIMIT 1'
 );
-$consulta->bind_param('ss', $usuario, $password);
-$consulta->execute();
-$funcionario = $consulta->get_result()->fetch_assoc();
-$consulta->close();
+$stmt->bind_param('s', $usuario);
+$stmt->execute();
 
-if (!$funcionario) {
-    header('Location: ../pages/login_funcionario.html?error=1');
+// 3. Obtener el resultado de la consulta
+$resultado = $stmt->get_result();
+
+// 4. Verificar si el usuario existe
+if ($resultado->num_rows === 0) {
+    echo json_encode(['error' => 'Usuario no encontrado']);
     exit;
 }
 
-session_regenerate_id(true);
+$funcionario = $resultado->fetch_assoc();
+
+// 5. Verificar la contraseña guardada en funcionarios.contrasena
+if ($contrasenia !== $funcionario['contrasena']) {
+    echo json_encode(['error' => 'Contraseña incorrecta']);
+    exit;
+}
+
+// 6. Guardar los datos del funcionario en la sesión
 $_SESSION['funcionario'] = [
     'id' => $funcionario['id_funcionario'],
     'nombre' => $funcionario['nombre'],
@@ -35,6 +50,13 @@ $_SESSION['funcionario'] = [
     'cargo' => $funcionario['cargo']
 ];
 
-header('Location: ../pages/bienvenido_funcionario.html');
-exit;
+// 7. Enviar respuesta de éxito en JSON
+echo json_encode([
+    'exito' => true,
+    'usuario' => $funcionario
+]);
+
+// 8. Cerrar conexión y sentencia
+$stmt->close();
+$con->close();
 ?>

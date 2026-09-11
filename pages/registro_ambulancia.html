@@ -14,14 +14,17 @@
             <p class="text-muted mb-4">Ingrese los datos de la nueva ambulancia.</p>
 
             <form id="formulario">
+
                 <div class="mb-3">
                     <label class="form-label" for="matricula">Matrícula</label>
                     <input class="form-control" type="text" id="matricula" name="matricula" placeholder="Ej: ABC123" required>
                 </div>
+
                 <div class="mb-3">
                     <label class="form-label" for="modelo">Modelo</label>
                     <input class="form-control" type="text" id="modelo" name="modelo" placeholder="Ej: Mercedes A01" required>
                 </div>
+
                 <div class="mb-4">
                     <label class="form-label" for="estado">Estado</label>
                     <select class="form-select" id="estado" name="estado" required>
@@ -31,6 +34,8 @@
                         <option value="Mantenimiento">Mantenimiento</option>
                     </select>
                 </div>
+    
+                
                 <button class="btn btn-primary" type="submit" id="boton">Registrar ambulancia</button>
                 <a class="btn btn-link" href="bienvenido_funcionario.html">Volver al panel</a>
             </form>

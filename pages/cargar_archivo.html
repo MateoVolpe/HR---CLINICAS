@@ -1,0 +1,94 @@
+// CODIGO DADO POR EL PROFESOR CARBONEL
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cargar Documento</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+
+        body {
+            background: #eef7fc;
+            color: #16344a;
+            font-family: Arial, sans-serif;
+        }
+        .contenedor {
+            max-width: 760px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(22, 52, 74, 0.12);
+            padding: 30px;
+        }
+        .mensaje {
+            margin-top: 15px;
+            padding: 12px 15px;
+            border-radius: 10px;
+            display: none;
+            font-weight: 600;
+        }
+        .mensaje.error {
+            background: #fde8e8;
+            color: #b42318;
+            display: block;
+        }
+        .mensaje.ok {
+            background: #e8f7ee;
+            color: #127b42;
+            display: block;
+        }
+        .preview {
+            display: block;
+            max-width: 100%;
+            max-height: 260px;
+            margin-top: 20px;
+            border: 1px solid #dfe7ee;
+            border-radius: 10px;
+            background: #f6fbff;
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <h1 class="mb-4">Cargar documento</h1>
+
+        <form id="formDocumento">
+            <div class="mb-3">
+                <label for="titulo" class="form-label">Nombre del documento</label>
+                <input type="text" id="titulo" name="titulo" class="form-control" placeholder="Ej: Certificado médico" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="descripcion" class="form-label">Descripción</label>
+                <textarea id="descripcion" name="descripcion" class="form-control" rows="3" placeholder="Opcional"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="archivo" class="form-label">Seleccionar archivo</label>
+                <input type="file" id="archivo" name="archivo" class="form-control" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Subir documento</button>
+            <a href="bienvenido_funcionario.html" class="btn btn-link">Volver</a>
+        </form>
+
+        <div id="mensaje" class="mensaje"></div>
+
+        <hr class="my-4">
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="h5 mb-0">Documentos cargados</h2>
+            <button type="button" id="btnObtenerDocumentos" class="btn btn-outline-primary btn-sm">Actualizar lista</button>
+        </div>
+
+        <select id="listaDocumentos" class="form-select mb-3" size="6"></select>
+
+        <img id="preview" class="preview" alt="Previsualización del documento" style="display: none;">
+    </div>
+
+    <script src="../js/cargar.js"></script>
+</body>
+</html>

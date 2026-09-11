@@ -1,3 +1,6 @@
+// CODIGO DADO POR EL PROFESOR CARBONEL
+
+
 const formulario = document.querySelector('#inicio');
 
 formulario.addEventListener('submit', async (e) => {

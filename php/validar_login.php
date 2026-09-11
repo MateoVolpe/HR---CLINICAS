@@ -1,3 +1,5 @@
+// CODIGO DADO POR EL PROFESOR CARBONEL
+
 <?php
 require_once 'conexion.php';
 session_start();

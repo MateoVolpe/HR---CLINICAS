@@ -1,5 +1,3 @@
-// CODIGO DADO POR EL PROFESOR CARBONEL
-
 <?php
 require_once 'conexion.php';
 session_start();
@@ -23,6 +21,12 @@ $stmt = $con->prepare(
      WHERE usuario = ? AND estado = \'Activo\'
      LIMIT 1'
 );
+
+if (!$stmt) {
+    echo json_encode(['error' => 'Error en la consulta: ' . $con->error]);
+    exit;
+}
+
 $stmt->bind_param('s', $usuario);
 $stmt->execute();
 

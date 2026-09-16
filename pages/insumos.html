@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insumos</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; background: #eef7fc; color: #16344a; }
+        main { max-width: 800px; margin: auto; background: white; padding: 25px; }
+        h1 { color: #2878a8; }
+        form { display: flex; gap: 10px; margin-bottom: 20px; }
+        input, button { padding: 9px; }
+        input { flex: 1; }
+        button { background: #2878a8; color: white; border: 0; cursor: pointer; }
+        
+        .eliminar { background: #c0392b; }
+        .lista { width: 100%; }
+        .fila { display: flex; gap: 10px; padding: 10px; border-bottom: 1px solid #ccc; align-items: center; }
+        .fila-header { font-weight: bold; background: #5dade2; color: white; }
+        .fila span { flex: 1; }
+        .acciones { display: flex; gap: 10px; }
+        a { color: #2878a8; }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Insumos</h1>
+        <form id="formulario">
+            <input id="descripcion" type="text" placeholder="Ej: Guantes descartables" required>
+            <button type="submit">Registrar</button>
+        </form>
+
+        <div id="lista" class="lista">
+            <div class="fila fila-header">
+                <span>Insumo</span>
+                <span>Acciones</span>
+            </div>
+            <div class="fila">Cargando...</div>
+        </div>
+
+        <p><a href="bienvenido_funcionario.html">Volver al panel</a></p>
+    </main>
+    <script src="../js/insumos.js"></script>
+</body>
+</html>

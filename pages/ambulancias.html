@@ -8,42 +8,29 @@
 
 		body { font-family: Arial, sans-serif; margin: 30px; }
 		h1 { color: #2878a8; }
-		table { width: 100%; border-collapse: collapse; }
-		th, td { padding: 10px; border: 1px solid #ccc; text-align: left; }
-		th { background: #5dade2; color: white; }
 		input, select, button { width: 100%; padding: 7px; box-sizing: border-box; }
 		button { background: #2878a8; color: white; border: 0; cursor: pointer; }
+		.lista { width: 100%; max-width: 700px; }
+		.fila { display: flex; gap: 10px; padding: 10px; border-bottom: 1px solid #ccc; }
+		.fila-header { font-weight: bold; background: #5dade2; color: white; }
+		.fila span { flex: 1; }
 		
 	</style>
 </head>
 <body>
 	<h1>Ambulancias en curso</h1>
 
-	<table>
-		<thead>
-			<tr>
-				<th>Matrícula</th>
-				<th>Modelo</th>
-				<th>Estado</th>
-				<th>Acción</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td><input type="text" id="matricula" required></td>
-				<td><input type="text" id="modelo" required></td>
-				<td>
-					<select id="estado">
-						<option value="Disponible">Disponible</option>
-						<option value="En traslado">En traslado</option>
-						<option value="Mantenimiento">Mantenimiento</option>
-					</select>
-				</td>
-				<td><button type="button" id="boton">Guardar</button></td>
-			</tr>
-		</tbody>
-	</table>
+	<div id="listaAmbulancias" class="lista">
+		<div class="fila fila-header">
+			<span>Matrícula</span>
+			<span>Modelo</span>
+			<span>Estado</span>
+			<span>Acción</span>
+		</div>
+		<div class="fila">Cargando ambulancias...</div>
+	</div>
 
-	<script src="../js/registrar_ambulancia.js"></script>
+	<p><a href="bienvenido_funcionario.html">Volver al panel</a></p>
+	<script src="../js/listar_ambulancias.js"></script>
 </body>
 </html>

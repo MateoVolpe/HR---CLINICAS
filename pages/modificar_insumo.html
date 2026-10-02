@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar insumo | Hospital de Clínicas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
+</head>
+<body>
+    <main class="container py-5" style="max-width: 680px;">
+        <div class="card p-4 p-md-5">
+            <h1 class="h2 mb-2" style="color:#2878a8;">Modificar insumo</h1>
+            <p class="text-muted mb-4">Seleccione el insumo y actualice su descripción.</p>
+            <form id="formulario">
+                <div class="mb-3">
+                    <label class="form-label" for="insumo">Insumo</label>
+                    <select class="form-select" id="insumo" required>
+                        <option value="">Cargando insumos...</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label" for="descripcion">Nueva descripción</label>
+                    <input class="form-control" id="descripcion" name="descripcion" type="text" required disabled>
+                </div>
+                <button class="btn btn-primary" id="boton" type="submit" disabled>Guardar cambios</button>
+                <a class="btn btn-link" href="insumos.html">Volver a insumos</a>
+            </form>
+            <p id="respuesta" class="mt-4 mb-0" role="status" aria-live="polite"></p>
+        </div>
+    </main>
+    <script src="../js/modificar_insumo.js"></script>
+</body>
+</html>

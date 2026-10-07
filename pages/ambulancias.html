@@ -1,362 +1,47 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Ambulancias - Hospital de Clínicas</title>
-
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <style>
-
-        body {
-            background-color: #f4f9fd;
-        }
-
-        .navbar {
-            background-color: white;
-        }
-
-        .logo {
-            height: 45px;
-        }
-
-        .titulo {
-            color: #087fc1;
-            font-weight: 600;
-        }
-
-        .card {
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-        }
-
-        .btn-celeste {
-            background-color: #168bd1;
-            color: white;
-            border: none;
-        }
-
-        .btn-celeste:hover {
-            background-color: #0876b5;
-            color: white;
-        }
-
-        .estado {
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 500;
-        }
-
-        .en-curso {
-            background-color: #fff3cd;
-            color: #856404;
-        }
-
-        .finalizado {
-            background-color: #d1e7dd;
-            color: #0f5132;
-        }
-
-        .pendiente {
-            background-color: #cfe2ff;
-            color: #084298;
-        }
-
-        .numero {
-            font-size: 28px;
-            font-weight: bold;
-            color: #087fc1;
-        }
-
-    </style>
-
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ambulancias</title>
+	<style>
+		body { font-family: Arial, sans-serif; margin: 30px; }
+		h1 { color: #2878a8; }
+		table { width: 100%; border-collapse: collapse; }
+		th, td { padding: 10px; border: 1px solid #ccc; text-align: left; }
+		th { background: #5dade2; color: white; }
+		input, select, button { width: 100%; padding: 7px; box-sizing: border-box; }
+		button { background: #2878a8; color: white; border: 0; cursor: pointer; }
+	</style>
 </head>
-
-
 <body>
-
-
-<!-- NAVBAR -->
-
-<nav class="navbar shadow-sm">
-
-    <div class="container">
-
-        <a class="navbar-brand d-flex align-items-center">
-
-            <img src="Logo_Hc.png" class="logo me-2">
-
-            <strong>
-                Hospital de Clínicas
-            </strong>
-
-        </a>
-
-        <span class="titulo">
-            Módulo de Ambulancias
-        </span>
-
-    </div>
-
-</nav>
-
-
-
-<div class="container py-5">
-
-
-    <!-- TÍTULO -->
-
-    <div class="d-flex justify-content-between align-items-center mb-4">
-
-        <div>
-
-            <h2 class="titulo">
-                Gestión de ambulancias
-            </h2>
-
-            <p class="text-muted mb-0">
-                Gestión y seguimiento de traslados
-            </p>
-
-        </div>
-
-
-        <a href="nuevo_traslado.html"
-           class="btn btn-celeste">
-
-            + Nuevo traslado
-
-        </a>
-
-    </div>
-
-
-
-    <!-- RESUMEN -->
-
-    <div class="row g-4 mb-4">
-
-
-        <div class="col-md-4">
-
-            <div class="card p-4">
-
-                <p class="text-muted mb-1">
-                    Traslados pendientes
-                </p>
-
-                <div class="numero">
-                    3
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="col-md-4">
-
-            <div class="card p-4">
-
-                <p class="text-muted mb-1">
-                    Traslados en curso
-                </p>
-
-                <div class="numero">
-                    2
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="col-md-4">
-
-            <div class="card p-4">
-
-                <p class="text-muted mb-1">
-                    Traslados finalizados
-                </p>
-
-                <div class="numero">
-                    15
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-
-    <!-- TABLA -->
-
-    <div class="card">
-
-        <div class="p-4 border-bottom">
-
-            <h5 class="mb-0">
-                Traslados registrados
-            </h5>
-
-        </div>
-
-
-        <div class="table-responsive">
-
-            <table class="table align-middle mb-0">
-
-                <thead>
-
-                    <tr>
-
-                        <th>ID</th>
-
-                        <th>Conductor</th>
-
-                        <th>Elemento</th>
-
-                        <th>Destino</th>
-
-                        <th>Hora salida</th>
-
-                        <th>Estado</th>
-
-                        <th>Acciones</th>
-
-                    </tr>
-
-                </thead>
-
-
-                <tbody>
-
-
-                    <tr>
-
-                        <td>#001</td>
-
-                        <td>Juan Pérez</td>
-
-                        <td>Paciente</td>
-
-                        <td>Hospital de Salto</td>
-
-                        <td>10:30</td>
-
-                        <td>
-
-                            <span class="estado en-curso">
-                                En curso
-                            </span>
-
-                        </td>
-
-                        <td>
-
-                            <a href="#"
-                               class="btn btn-sm btn-outline-primary">
-
-                                Ver
-
-                            </a>
-
-                        </td>
-
-                    </tr>
-
-
-
-                    <tr>
-
-                        <td>#002</td>
-
-                        <td>Pedro Silva</td>
-
-                        <td>Equipamiento médico</td>
-
-                        <td>Hospital de Paysandú</td>
-
-                        <td>09:15</td>
-
-                        <td>
-
-                            <span class="estado finalizado">
-                                Finalizado
-                            </span>
-
-                        </td>
-
-                        <td>
-
-                            <a href="#"
-                               class="btn btn-sm btn-outline-primary">
-
-                                Ver
-
-                            </a>
-
-                        </td>
-
-                    </tr>
-
-
-
-                    <tr>
-
-                        <td>#003</td>
-
-                        <td>Lucas Gómez</td>
-
-                        <td>Paciente</td>
-
-                        <td>Montevideo</td>
-
-                        <td>11:45</td>
-
-                        <td>
-
-                            <span class="estado pendiente">
-                                Pendiente
-                            </span>
-
-                        </td>
-
-                        <td>
-
-                            <a href="#"
-                               class="btn btn-sm btn-outline-primary">
-
-                                Ver
-
-                            </a>
-
-                        </td>
-
-                    </tr>
-
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-    </div>
-
-
-</div>
-
-
+	<h1>Ambulancias en curso</h1>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Matrícula</th>
+				<th>Modelo</th>
+				<th>Estado</th>
+				<th>Acción</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><input type="text" id="matricula" required></td>
+				<td><input type="text" id="modelo" required></td>
+				<td>
+					<select id="estado">
+						<option value="Disponible">Disponible</option>
+						<option value="En traslado">En traslado</option>
+						<option value="Mantenimiento">Mantenimiento</option>
+					</select>
+				</td>
+				<td><button type="button" id="boton">Guardar</button></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<script src="../js/registrar_ambulancia.js"></script>
 </body>
-
 </html>

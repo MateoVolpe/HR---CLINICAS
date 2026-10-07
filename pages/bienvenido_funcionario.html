@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido funcionario</title>
+    <style>
+        body { margin: 0; background: #eef7fc; color: #16344a; font-family: Arial, sans-serif; }
+        
+        header { padding: 30px 20px; background: #2878a8; color: white; }
+        .cabecera,
+         main { width: 90%; max-width: 900px; margin: auto; }
+        
+         header img { width: 100px; height: 100px; object-fit: cover; border-radius: 100%; }
+        .foto-hospital { width: 100%; height: 130px; margin-top: 10px; object-fit: cover; }
+        
+        main { padding: 30px 0; }
+        .opciones { display: flex; flex-wrap: wrap; gap: 5px; }
+        .opcion { flex: 1 1 220px; padding: 20px; background: white; text-decoration: none; }
+        .opcion strong, .opcion span { display: block; }
+        .opcion strong { margin-bottom: 8px; color: #16344a; }
+        .opcion span, .salir { color: #2878a8; }
+        .salir { display: block; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="cabecera">
+            <img src="../img/Logo_Hc.jpg" alt="Logo Hospital de Clínicas">
+            <img class="foto-hospital" src="../img/hospitalfoto.jpg" alt="Hospital de Clínicas">
+            <h1>Bienvenido funcionario</h1>
+            <p>Administra la información del Hospital de Clínicas.</p>
+        </div>
+    </header>
+
+    <main>
+        <nav class="opciones" aria-label="Opciones del sistema">
+            <a class="opcion" href="funcionario.html">
+                <strong>Registrar funcionario</strong>
+                <span>Crear un nuevo usuario</span>
+            </a>
+            <a class="opcion" href="ambulancias.html">
+                <strong>Módulo ambulancias</strong>
+                <span>Consultar ambulancias</span>
+            </a>
+            <a class="opcion" href="registro_ambulancia.html">
+                <strong>Registrar ambulancia</strong>
+                <span>Agregar una ambulancia</span>
+            </a>
+            <a class="opcion" href="actualizarambulancia.html">
+                <strong>Actualizar ambulancia</strong>
+                <span>Modificar sus datos</span>
+            </a>
+            <a class="opcion" href="eliminarambulancia.html">
+                <strong>Eliminar ambulancia</strong>
+                <span>Retirar una ambulancia</span>
+            </a>
+        </nav>
+
+        <a class="salir" href="login_funcionario.html">Cerrar sesión</a>
+    </main>
+</body>
+</html>

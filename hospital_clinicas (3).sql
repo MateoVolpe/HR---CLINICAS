@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-08-2026 a las 16:00:40
+-- Tiempo de generación: 31-08-2026 a las 13:31:58
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -44,7 +44,29 @@ CREATE TABLE `ambulancias` (
   `id_ambulancia` int(11) NOT NULL,
   `matricula` varchar(7) DEFAULT NULL,
   `modelo` varchar(100) DEFAULT NULL,
-  `estado` enum('Disponible','En traslado','Mantenimiento') DEFAULT NULL
+  `id_estado` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `ambulancias`
+--
+
+INSERT INTO `ambulancias` (`id_ambulancia`, `matricula`, `modelo`, `id_estado`) VALUES
+(1, '', '', NULL),
+(3, '400', 'Mitshubi 200', 1),
+(4, '193', 'Roven', 2),
+(6, 'aa', 'a', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `codigos_qr`
+--
+
+CREATE TABLE `codigos_qr` (
+  `id_qr` int(11) NOT NULL,
+  `codigo` varchar(255) NOT NULL,
+  `id_documento` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -71,7 +93,6 @@ CREATE TABLE `documentos` (
   `titulo` varchar(200) NOT NULL,
   `descripcion` text DEFAULT NULL,
   `archivo` varchar(255) NOT NULL,
-  `codigo_qr` varchar(255) NOT NULL,
   `fecha_subida` datetime DEFAULT current_timestamp(),
   `id_funcionario` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -84,8 +105,8 @@ CREATE TABLE `documentos` (
 
 CREATE TABLE `elementos` (
   `id_elemento` int(11) NOT NULL,
-  `tipo` enum('Paciente','Material Biológico','Equipamiento Médico','Insumo') DEFAULT NULL,
-  `descripcion` varchar(255) DEFAULT NULL
+  `descripcion` varchar(255) DEFAULT NULL,
+  `id_tipo` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -101,6 +122,48 @@ CREATE TABLE `encuestas` (
   `fecha_creacion` date DEFAULT NULL,
   `id_funcionario` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `estados_ambulancia`
+--
+
+CREATE TABLE `estados_ambulancia` (
+  `id_estado` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `estados_ambulancia`
+--
+
+INSERT INTO `estados_ambulancia` (`id_estado`, `nombre`) VALUES
+(1, 'Disponible'),
+(2, 'En traslado'),
+(3, 'Mantenimiento');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `estados_traslado`
+--
+
+CREATE TABLE `estados_traslado` (
+  `id_estado` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `estados_traslado`
+--
+
+INSERT INTO `estados_traslado` (`id_estado`, `nombre`) VALUES
+(2, 'En camino'),
+(5, 'Finalizado'),
+(3, 'Llegó al destino'),
+(1, 'Pendiente'),
+(4, 'Regresando');
 
 -- --------------------------------------------------------
 
@@ -166,6 +229,27 @@ CREATE TABLE `rutas` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tipos_elemento`
+--
+
+CREATE TABLE `tipos_elemento` (
+  `id_tipo` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tipos_elemento`
+--
+
+INSERT INTO `tipos_elemento` (`id_tipo`, `nombre`) VALUES
+(3, 'Equipamiento Médico'),
+(4, 'Insumo'),
+(2, 'Material Biológico'),
+(1, 'Paciente');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `traslados`
 --
 
@@ -175,12 +259,11 @@ CREATE TABLE `traslados` (
   `id_conductor` int(11) DEFAULT NULL,
   `id_acompanante` int(11) DEFAULT NULL,
   `id_elemento` int(11) DEFAULT NULL,
-  `origen` varchar(200) DEFAULT NULL,
-  `destino` varchar(200) DEFAULT NULL,
   `hora_salida` datetime DEFAULT NULL,
   `hora_llegada` datetime DEFAULT NULL,
-  `estado` enum('Pendiente','En camino','Llegó al destino','Regresando','Finalizado') DEFAULT 'Pendiente',
-  `id_funcionario` int(11) DEFAULT NULL
+  `id_funcionario` int(11) DEFAULT NULL,
+  `id_ruta` int(11) DEFAULT NULL,
+  `id_estado` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -198,7 +281,16 @@ ALTER TABLE `acompanantes`
 --
 ALTER TABLE `ambulancias`
   ADD PRIMARY KEY (`id_ambulancia`),
-  ADD UNIQUE KEY `matricula` (`matricula`);
+  ADD UNIQUE KEY `matricula` (`matricula`),
+  ADD KEY `fk_ambulancia_estado` (`id_estado`);
+
+--
+-- Indices de la tabla `codigos_qr`
+--
+ALTER TABLE `codigos_qr`
+  ADD PRIMARY KEY (`id_qr`),
+  ADD UNIQUE KEY `codigo` (`codigo`),
+  ADD UNIQUE KEY `id_documento` (`id_documento`);
 
 --
 -- Indices de la tabla `conductores`
@@ -217,7 +309,8 @@ ALTER TABLE `documentos`
 -- Indices de la tabla `elementos`
 --
 ALTER TABLE `elementos`
-  ADD PRIMARY KEY (`id_elemento`);
+  ADD PRIMARY KEY (`id_elemento`),
+  ADD KEY `fk_elemento_tipo` (`id_tipo`);
 
 --
 -- Indices de la tabla `encuestas`
@@ -225,6 +318,20 @@ ALTER TABLE `elementos`
 ALTER TABLE `encuestas`
   ADD PRIMARY KEY (`id_encuesta`),
   ADD KEY `id_funcionario` (`id_funcionario`);
+
+--
+-- Indices de la tabla `estados_ambulancia`
+--
+ALTER TABLE `estados_ambulancia`
+  ADD PRIMARY KEY (`id_estado`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
+
+--
+-- Indices de la tabla `estados_traslado`
+--
+ALTER TABLE `estados_traslado`
+  ADD PRIMARY KEY (`id_estado`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
 -- Indices de la tabla `funcionarios`
@@ -254,6 +361,13 @@ ALTER TABLE `rutas`
   ADD PRIMARY KEY (`id_ruta`);
 
 --
+-- Indices de la tabla `tipos_elemento`
+--
+ALTER TABLE `tipos_elemento`
+  ADD PRIMARY KEY (`id_tipo`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
+
+--
 -- Indices de la tabla `traslados`
 --
 ALTER TABLE `traslados`
@@ -262,7 +376,9 @@ ALTER TABLE `traslados`
   ADD KEY `id_conductor` (`id_conductor`),
   ADD KEY `id_acompanante` (`id_acompanante`),
   ADD KEY `id_elemento` (`id_elemento`),
-  ADD KEY `id_funcionario` (`id_funcionario`);
+  ADD KEY `id_funcionario` (`id_funcionario`),
+  ADD KEY `fk_traslado_ruta` (`id_ruta`),
+  ADD KEY `fk_traslado_estado` (`id_estado`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -278,7 +394,13 @@ ALTER TABLE `acompanantes`
 -- AUTO_INCREMENT de la tabla `ambulancias`
 --
 ALTER TABLE `ambulancias`
-  MODIFY `id_ambulancia` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_ambulancia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `codigos_qr`
+--
+ALTER TABLE `codigos_qr`
+  MODIFY `id_qr` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `conductores`
@@ -305,6 +427,18 @@ ALTER TABLE `encuestas`
   MODIFY `id_encuesta` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `estados_ambulancia`
+--
+ALTER TABLE `estados_ambulancia`
+  MODIFY `id_estado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `estados_traslado`
+--
+ALTER TABLE `estados_traslado`
+  MODIFY `id_estado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT de la tabla `funcionarios`
 --
 ALTER TABLE `funcionarios`
@@ -329,6 +463,12 @@ ALTER TABLE `rutas`
   MODIFY `id_ruta` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `tipos_elemento`
+--
+ALTER TABLE `tipos_elemento`
+  MODIFY `id_tipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT de la tabla `traslados`
 --
 ALTER TABLE `traslados`
@@ -339,10 +479,28 @@ ALTER TABLE `traslados`
 --
 
 --
+-- Filtros para la tabla `ambulancias`
+--
+ALTER TABLE `ambulancias`
+  ADD CONSTRAINT `fk_ambulancia_estado` FOREIGN KEY (`id_estado`) REFERENCES `estados_ambulancia` (`id_estado`);
+
+--
+-- Filtros para la tabla `codigos_qr`
+--
+ALTER TABLE `codigos_qr`
+  ADD CONSTRAINT `codigos_qr_ibfk_1` FOREIGN KEY (`id_documento`) REFERENCES `documentos` (`id_documento`);
+
+--
 -- Filtros para la tabla `documentos`
 --
 ALTER TABLE `documentos`
   ADD CONSTRAINT `documentos_ibfk_1` FOREIGN KEY (`id_funcionario`) REFERENCES `funcionarios` (`id_funcionario`);
+
+--
+-- Filtros para la tabla `elementos`
+--
+ALTER TABLE `elementos`
+  ADD CONSTRAINT `fk_elemento_tipo` FOREIGN KEY (`id_tipo`) REFERENCES `tipos_elemento` (`id_tipo`);
 
 --
 -- Filtros para la tabla `encuestas`
@@ -366,6 +524,8 @@ ALTER TABLE `respuestas`
 -- Filtros para la tabla `traslados`
 --
 ALTER TABLE `traslados`
+  ADD CONSTRAINT `fk_traslado_estado` FOREIGN KEY (`id_estado`) REFERENCES `estados_traslado` (`id_estado`),
+  ADD CONSTRAINT `fk_traslado_ruta` FOREIGN KEY (`id_ruta`) REFERENCES `rutas` (`id_ruta`),
   ADD CONSTRAINT `traslados_ibfk_1` FOREIGN KEY (`id_ambulancia`) REFERENCES `ambulancias` (`id_ambulancia`),
   ADD CONSTRAINT `traslados_ibfk_2` FOREIGN KEY (`id_conductor`) REFERENCES `conductores` (`id_conductor`),
   ADD CONSTRAINT `traslados_ibfk_3` FOREIGN KEY (`id_acompanante`) REFERENCES `acompanantes` (`id_acompanante`),

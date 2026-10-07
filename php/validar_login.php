@@ -1,5 +1,3 @@
-// CODIGO DADO POR EL PROFESOR CARBONEL
-
 <?php
 require_once 'conexion.php';
 session_start();
@@ -23,6 +21,12 @@ $stmt = $con->prepare(
      WHERE usuario = ? AND estado = \'Activo\'
      LIMIT 1'
 );
+
+if (!$stmt) {
+    echo json_encode(['error' => 'Error en la consulta: ' . $con->error]);
+    exit;
+}
+
 $stmt->bind_param('s', $usuario);
 $stmt->execute();
 
@@ -38,7 +42,18 @@ if ($resultado->num_rows === 0) {
 $funcionario = $resultado->fetch_assoc();
 
 // 5. Verificar la contraseña guardada en funcionarios.contrasena
-if ($contrasenia !== $funcionario['contrasena']) {
+$contrasenaValida = password_verify($contrasenia, $funcionario['contrasena']);
+
+// Actualiza automáticamente usuarios antiguos que tenían la contraseña sin hash.
+if (!$contrasenaValida && hash_equals($funcionario['contrasena'], $contrasenia)) {
+    $nuevoHash = password_hash($contrasenia, PASSWORD_DEFAULT);
+    $actualizar = $con->prepare('UPDATE funcionarios SET contrasena = ? WHERE id_funcionario = ?');
+    $actualizar->bind_param('si', $nuevoHash, $funcionario['id_funcionario']);
+    $actualizar->execute();
+    $contrasenaValida = true;
+}
+
+if (!$contrasenaValida) {
     echo json_encode(['error' => 'Contraseña incorrecta']);
     exit;
 }
@@ -53,6 +68,7 @@ $_SESSION['funcionario'] = [
 ];
 
 // 7. Enviar respuesta de éxito en JSON
+unset($funcionario['contrasena']);
 echo json_encode([
     'exito' => true,
     'usuario' => $funcionario

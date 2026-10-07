@@ -1,4 +1,3 @@
-// CODIGO DADO POR EL PROFESOR CARBONEL
 
 <?php
 header('Content-Type: application/json; charset=utf-8');
@@ -20,3 +19,4 @@ echo json_encode($documentos);
 if (isset($con)) {
     $con->close();
 }
+

@@ -24,6 +24,6 @@ formulario.addEventListener('submit', async (e) => {
             window.location.href = 'bienvenido_funcionario.html';
         }
     } catch (error) {
-        alert('No se pudo conectar con el servidor.');
+        alert('No se pudo conectar con el servidor.' , error);
     }
 });

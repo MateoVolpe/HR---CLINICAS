@@ -9,7 +9,7 @@ header('Content-Type: application/json; charset=utf-8');
 
 // 1. Obtener datos enviados desde el formulario
 $usuario = $_POST['usuario'] ?? '';
-$contrasenia = $_POST['contrasenia'] ?? $_POST['password'] ?? '';
+$contrasenia = $_POST['contrasenia'] ?? '';
 
 if ($usuario === '' || $contrasenia === '') {
     echo json_encode(['error' => 'Complete usuario y contraseña']);

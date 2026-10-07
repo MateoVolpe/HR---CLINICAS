@@ -1,0 +1,80 @@
+:root {
+    color-scheme: light;
+    --ink: #17324a;
+    --muted: #627587;
+    --line: #d9e2e8;
+    --surface: #ffffff;
+    --canvas: #f1f5f5;
+    --accent: #167c80;
+    --accent-dark: #105e62;
+}
+
+body {
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.eyebrow {
+    color: var(--accent-dark);
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+}
+
+.panel {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 1.1rem;
+}
+
+.form-label {
+    color: var(--ink);
+    font-size: .9rem;
+    font-weight: 600;
+}
+
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+}
+
+.mensaje:empty {
+    display: none;
+}
+
+.mensaje.error {
+    color: #a12d2d;
+}
+
+.mensaje.ok {
+    color: #176b46;
+}
+
+.lista-traslados {
+    display: grid;
+    gap: .65rem;
+    max-height: 440px;
+    overflow-y: auto;
+}
+
+.traslado {
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    padding: .75rem;
+}
+
+.traslado-ruta {
+    color: var(--muted);
+    font-size: .88rem;
+    overflow-wrap: anywhere;
+}
+

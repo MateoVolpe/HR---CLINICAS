@@ -3,85 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenido funcionario</title>
+    <title>Panel del funcionario | Hospital de Clínicas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body { margin: 0; background: #eef7fc; color: #16344a; font-family: Arial, sans-serif; }
-        
-        header { padding: 30px 20px; background: #2878a8; color: white; }
-        .cabecera,
-         main { width: 90%; max-width: 900px; margin: auto; }
-        
-         header img { width: 100px; height: 100px; object-fit: cover; border-radius: 100%; }
-        .foto-hospital { width: 100%; height: 130px; margin-top: 10px; object-fit: cover; }
-        
-        main { padding: 30px 0; }
-        .opciones { display: flex; flex-wrap: wrap; gap: 5px; }
-        .opcion { flex: 1 1 220px; padding: 20px; background: white; text-decoration: none; }
-        .opcion strong, .opcion span { display: block; }
-        .opcion strong { margin-bottom: 8px; color: #16344a; }
-        .opcion span, .salir { color: #2878a8; }
-        .salir { display: block; margin-top: 20px; }
+        :root { --hospital-blue: #2878a8; --ink: #17364a; --canvas: #f2f7fa; }
+        body { margin: 0; background: var(--canvas); color: var(--ink); font-family: "Segoe UI", Arial, sans-serif; }
+        .topbar { background: #fff; border-bottom: 1px solid #dce8ee; }
+        .brand-logo { width: 54px; height: 54px; object-fit: cover; border-radius: 50%; }
+        .cover { width: 100%; height: 190px; object-fit: cover; }
+        main { max-width: 1000px; }
+        .section-title { color: var(--hospital-blue); }
+        .quick-link { min-height: 112px; color: inherit; text-decoration: none; border: 1px solid #dce8ee; border-top: 3px solid var(--hospital-blue); background: #fff; }
+        .quick-link:hover, .quick-link:focus-visible { border-color: var(--hospital-blue); color: var(--hospital-blue); }
+        .quick-link strong, .quick-link span { display: block; }
+        .quick-link strong { margin-bottom: 6px; }
+        .group-list a { color: var(--hospital-blue); text-decoration: none; }
+        .group-list a:hover { text-decoration: underline; }
+        details { background: #fff; border: 1px solid #dce8ee; border-radius: 4px; }
+        details + details { margin-top: 10px; }
+        summary { cursor: pointer; font-weight: 600; padding: 16px 18px; }
+        details[open] summary { border-bottom: 1px solid #dce8ee; }
+        .group-list { padding: 14px 18px; }
+        .group-list a + a::before { content: "·"; color: #8ba3b2; padding: 0 10px; }
+        .signout { color: #536b79; }
+        @media (max-width: 575.98px) { .cover { height: 140px; } }
     </style>
 </head>
 <body>
-    <header>
-        <div class="cabecera">
-            <img src="../img/Logo_Hc.jpg" alt="Logo Hospital de Clínicas">
-            <img class="foto-hospital" src="../img/hospitalfoto.jpg" alt="Hospital de Clínicas">
-            <h1>Bienvenido funcionario</h1>
-            <p>Administra la información del Hospital de Clínicas.</p>
+    <header class="topbar">
+        <div class="container py-3 d-flex align-items-center gap-3">
+            <img class="brand-logo" src="../img/Logo_Hc.jpg" alt="Logo Hospital de Clínicas">
+            <div>
+                <div class="fw-semibold">Hospital de Clínicas</div>
+                <div class="small text-secondary">Portal para funcionarios</div>
+            </div>
         </div>
     </header>
 
-    <main>
-        <nav class="opciones" aria-label="Opciones del sistema">
-            <a class="opcion" href="funcionario.html">
-                <strong>Registrar funcionario</strong>
-                <span>Crear un nuevo usuario</span>
-            </a>
-            <a class="opcion" href="eliminar_funcionario.html">
-                <strong>Eliminar funcionario</strong>
-                <span>Retirar un usuario del sistema</span>
-            </a>
-            <a class="opcion" href="ver_funcionarios.html">
-                <strong>Ver funcionarios</strong>
-                <span>Consultar los funcionarios registrados</span>
-            </a>
-            <a class="opcion" href="ambulancias.html">
-                <strong>Módulo ambulancias</strong>
-                <span>Consultar ambulancias</span>
-            </a>
-            <a class="opcion" href="agregar_insumo.html">
-                <strong>Agregar insumo</strong>
-                <span>Registrar un nuevo insumo</span>
-            </a>
-            <a class="opcion" href="modificar_insumo.html">
-                <strong>Modificar insumo</strong>
-                <span>Actualizar un insumo existente</span>
-            </a>
-            <a class="opcion" href="eliminar_insumo.html">
-                <strong>Eliminar insumo</strong>
-                <span>Retirar un insumo del sistema</span>
-            </a>
-            <a class="opcion" href="ver_insumos.html">
-                <strong>Ver insumos</strong>
-                <span>Consultar los insumos registrados</span>
-            </a>
-            <a class="opcion" href="registro_ambulancia.html">
-                <strong>Registrar ambulancia</strong>
-                <span>Agregar una ambulancia</span>
-            </a>
-            <a class="opcion" href="actualizarambulancia.html">
-                <strong>Actualizar ambulancia</strong>
-                <span>Modificar sus datos</span>
-            </a>
-            <a class="opcion" href="eliminarambulancia.html">
-                <strong>Eliminar ambulancia</strong>
-                <span>Retirar una ambulancia</span>
-            </a>
-        </nav>
+    <img class="cover" src="../img/hospitalfoto.jpg" alt="Edificio del Hospital de Clínicas">
 
-        <a class="salir" href="login_funcionario.html">Cerrar sesión</a>
+    <main class="container py-4 py-md-5">
+        <div class="d-flex flex-wrap justify-content-between align-items-end gap-2 mb-4">
+            <div>
+                <h1 class="h2 mb-1">Bienvenido, funcionario</h1>
+                <p class="text-secondary mb-0">Accesos principales y administración del hospital.</p>
+            </div>
+            <a class="signout small" href="login_funcionario.html">Cerrar sesión</a>
+        </div>
+
+        <section aria-labelledby="accesos-principales" class="mb-5">
+            <h2 id="accesos-principales" class="h5 section-title mb-3">Accesos principales</h2>
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <a class="quick-link d-block p-3 h-100" href="cargar_archivo.html">
+                        <strong>Cargar documentos</strong>
+                        <span class="small text-secondary">Subir y consultar documentos</span>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a class="quick-link d-block p-3 h-100" href="encuesta_satisfaccion.html">
+                        <strong>Encuesta de satisfacción</strong>
+                        <span class="small text-secondary">Acceder a la encuesta del hospital</span>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a class="quick-link d-block p-3 h-100" href="informacion_hospital.html">
+                        <strong>Información general</strong>
+                        <span class="small text-secondary">Ubicación, contacto y horarios</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section aria-labelledby="administracion">
+            <h2 id="administracion" class="h5 section-title mb-3">Administración</h2>
+            <details>
+                <summary>Funcionarios</summary>
+                <div class="group-list">
+                    <a href="funcionario.html">Registrar funcionario</a>
+                    <a href="ver_funcionarios.html">Ver funcionarios</a>
+                    <a href="eliminar_funcionario.html">Eliminar funcionario</a>
+                </div>
+            </details>
+            <details>
+                <summary>Insumos</summary>
+                <div class="group-list">
+                    <a href="ver_insumos.html">Ver insumos</a>
+                    <a href="agregar_insumo.html">Agregar</a>
+                    <a href="modificar_insumo.html">Modificar</a>
+                    <a href="eliminar_insumo.html">Eliminar</a>
+                </div>
+            </details>
+            <details>
+                <summary>Ambulancias y traslados</summary>
+                <div class="group-list">
+                    <a href="ambulancias.html">Ver ambulancias</a>
+                    <a href="registro_ambulancia.html">Registrar</a>
+                    <a href="actualizarambulancia.html">Actualizar</a>
+                    <a href="eliminarambulancia.html">Eliminar</a>
+                    <a href="traslados.html">Traslados</a>
+                </div>
+            </details>
+        </section>
     </main>
 </body>
 </html>

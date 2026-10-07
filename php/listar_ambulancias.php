@@ -4,7 +4,6 @@ require_once 'conexion.php';
 $sql = "SELECT a.matricula, a.modelo, e.nombre AS estado
         FROM ambulancias a
         INNER JOIN estados_ambulancia e ON e.id_estado = a.id_estado
-        WHERE e.nombre = 'En traslado'
         ORDER BY a.matricula";
 
 $resultado = $con->query($sql);

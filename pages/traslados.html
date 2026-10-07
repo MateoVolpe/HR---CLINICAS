@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traslados de ambulancias | Hospital de Clínicas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/traslados.css" rel="stylesheet">
+</head>
+<body>
+    <main class="container-fluid py-4 px-3 px-lg-4">
+        <header class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+            <div>
+                <p class="eyebrow mb-1">HOSPITAL DE CLÍNICAS</p>
+                <h1 class="h2 mb-0">Traslados de ambulancias</h1>
+            </div>
+            <a class="btn btn-outline-secondary" href="bienvenido_funcionario.html">Volver al panel</a>
+        </header>
+
+        <div class="row g-4">
+            <section class="col-12 col-lg-5" aria-label="Registrar y consultar traslados">
+                <div class="panel mb-4">
+                    <h2 class="h5 mb-3">Nuevo traslado</h2>
+                    <form id="formTraslado">
+                        <div class="mb-3">
+                            <label class="form-label" for="ambulancia">Ambulancia disponible</label>
+                            <select class="form-select" id="ambulancia" name="id_ambulancia" required>
+                                <option value="">Cargando ambulancias...</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="origen">Origen</label>
+                            <input class="form-control" id="origen" name="origen" maxlength="200" required placeholder="Dirección o lugar de salida">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="destino">Destino</label>
+                            <input class="form-control" id="destino" name="destino" maxlength="200" required placeholder="Dirección o lugar de llegada">
+                        </div>
+                        <button class="btn btn-primary w-100" type="submit">Registrar traslado</button>
+                    </form>
+                    <p id="mensaje" class="mensaje mb-0 mt-3" role="status" aria-live="polite"></p>
+                </div>
+
+                <div class="panel">
+                    <div class="d-flex justify-content-between align-items-center gap-2 mb-3">
+                        <h2 class="h5 mb-0">Traslados activos</h2>
+                        <button class="btn btn-sm btn-outline-secondary" id="actualizar" type="button">Actualizar</button>
+                    </div>
+                    <div id="listaTraslados" class="lista-traslados" aria-live="polite">Cargando traslados...</div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="../js/traslados.js"></script>
+</body>
+</html>

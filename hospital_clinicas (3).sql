@@ -44,6 +44,8 @@ CREATE TABLE `ambulancias` (
   `id_ambulancia` int(11) NOT NULL,
   `matricula` varchar(7) DEFAULT NULL,
   `modelo` varchar(100) DEFAULT NULL,
+  `latitud` decimal(10,7) DEFAULT NULL,
+  `longitud` decimal(10,7) DEFAULT NULL,
   `id_estado` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

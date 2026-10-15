@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa de traslados</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body>
+    <main>
+        <h1>Mapa de traslados</h1>
+
+        <p>
+            <label for="departamento">Departamento:</label>
+            <input id="departamento" type="text" value="Montevideo">
+        </p>
+        <p>
+            <label for="dir">Dirección de destino:</label>
+            <input id="dir" type="text" placeholder="Calle y número">
+            <button id="ubicar" type="button">Ubicar destino</button>
+        </p>
+        <p>
+            <button id="ingresarO" type="button">Usar marcador como origen</button>
+            <button id="rutear" type="button">Rutear</button>
+        </p>
+        <p>
+            <label for="lat">Latitud de origen:</label>
+            <input id="lat" type="text" readonly>
+            <label for="lng">Longitud de origen:</label>
+            <input id="lng" type="text" readonly>
+        </p>
+
+        <div id="visualizar" style="height: 500px; width: 100%;"></div>
+        <p id="mensaje" role="status" aria-live="polite"></p>
+    </main>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="../js/mapa.js"></script>
+</body>
+</html>

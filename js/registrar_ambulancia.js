@@ -1,12 +1,17 @@
 const matricula = document.getElementById('matricula');
 const modelo = document.getElementById('modelo');
 const estado = document.getElementById('estado');
+<<<<<<< HEAD
+const boton = document.getElementById('boton');
+const formulario = document.getElementById('formulario');
+=======
 const formulario = document.getElementById('formulario');
 const latitud = document.getElementById('latitud');
 const longitud = document.getElementById('longitud');
 const mapa = L.map('mapa').setView([-34.89, -56.16], 13);
 const iconoAmbulancia = L.divIcon({ html: '🚑', className: '', iconSize: [30, 30], iconAnchor: [15, 15] });
 let pin;
+>>>>>>> 99441b4e4c927d6521e06d80e5d483b225033b8b
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
@@ -33,6 +38,24 @@ formulario.addEventListener('submit', async (evento) => {
         });
         const texto = await respuesta.text();
 
+<<<<<<< HEAD
+    let texto = await respuesta.text();
+
+
+    if (texto.trim() === 'ok') {
+        alert('Ambulancia guardada correctamente');
+        if (formulario && typeof formulario.reset === 'function') {
+            formulario.reset();
+        }
+        
+matricula.value = '';
+        modelo.value = '';
+        estado.selectedIndex = 0;
+
+    } else {
+        alert('Error al guardar la ambulancia');
+        
+=======
         if (texto.trim() === 'ok') {
             alert('Ambulancia guardada correctamente');
             formulario.reset();
@@ -42,5 +65,6 @@ formulario.addEventListener('submit', async (evento) => {
         }
     } catch (error) {
         alert('No se pudo conectar con el servidor.');
+>>>>>>> 99441b4e4c927d6521e06d80e5d483b225033b8b
     }
 });

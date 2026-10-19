@@ -3,7 +3,7 @@
 $servidor = "localhost";
 $usuario = "root";
 $password = "";
-$base_datos = "hospital_clinicas";
+$base_datos = "db_mateovolpe";
 
 $con = new mysqli($servidor, $usuario, $password, $base_datos);
 

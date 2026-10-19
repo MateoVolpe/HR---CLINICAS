@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `hospital_clinicas`
+-- Base de datos: `db_mateovolpe`
 --
 
 -- --------------------------------------------------------

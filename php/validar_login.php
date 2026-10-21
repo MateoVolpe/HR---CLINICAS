@@ -9,6 +9,11 @@ header('Content-Type: application/json; charset=utf-8');
 $usuario = $_POST['usuario'] ?? '';
 $contrasenia = $_POST['contrasenia'] ?? '';
 
+if (($_POST['acepta_datos_personales'] ?? '') !== '1') {
+    echo json_encode(['error' => 'Debe aceptar las condiciones de manejo y uso de datos personales']);
+    exit;
+}
+
 if ($usuario === '' || $contrasenia === '') {
     echo json_encode(['error' => 'Complete usuario y contraseña']);
     exit;

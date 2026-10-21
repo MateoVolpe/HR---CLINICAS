@@ -50,6 +50,51 @@
             text-decoration:underline;
         }
 
+        #modalPrivacidad {
+            width: min(600px, calc(100% - 32px));
+            max-height: 80vh;
+            border: 1px solid #c8dce6;
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        #modalPrivacidad h2{
+            color:#2878a8;
+            font-size:1.4rem;
+        }
+
+        #modalPrivacidad h3{
+            font-size:1rem;
+        }
+
+        #modalPrivacidad::backdrop{
+            background:rgba(0,0,0,.5);
+        }
+
+        #inicio .consentimiento {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        #inicio .consentimiento input[type="checkbox"] {
+            appearance: auto;
+            -webkit-appearance: checkbox;
+            display: block;
+            flex: 0 0 20px;
+            width: 20px;
+            height: 20px;
+            margin: 3px 0 0;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #inicio .consentimiento label {
+            display: block;
+            line-height: 1.5;
+        }
+
     </style>
 
 </head>
@@ -116,7 +161,18 @@
 
                     </div>
 
-                    <button class="btn btn-primary w-100">
+                    <div class="consentimiento">
+                        <input type="checkbox" id="acepta_datos_personales"
+                            name="acepta_datos_personales" value="1" required>
+                        <label for="acepta_datos_personales">
+                            Declaro que conozco el
+                            <a href="#modalPrivacidad" id="enlacePrivacidad">
+                                manejo y la protección de mis datos y las condiciones de uso de la institución
+                            </a>.
+                        </label>
+                    </div>
+
+                    <button class="btn btn-primary w-100" type="submit">
                         Ingresar
                     </button>
 
@@ -138,6 +194,36 @@
 
 </div>
 
-<script src="../js/validar_login.js"></script>
+<dialog id="modalPrivacidad" aria-labelledby="tituloModalPrivacidad">
+    <h2 id="tituloModalPrivacidad">Manejo, protección y uso de datos personales</h2>
+    <h3>Manejo y protección de los datos</h3>
+    <p>
+        Los datos personales ingresados al sistema se utilizarán para gestionar el acceso y las funciones
+        del portal. Su consulta debe limitarse a personas autorizadas y usarse únicamente para los fines
+        institucionales correspondientes. Las contraseñas se almacenan mediante hash y no deben compartirse.
+    </p>
+    <p>
+        Los datos deben conservarse solo durante el tiempo necesario. Para solicitar acceso, corrección
+        o eliminación, la persona deberá dirigirse al responsable institucional por los canales que
+        establezca el Hospital de Clínicas.
+    </p>
+
+    <h3>Condiciones de uso por parte de la institución</h3>
+    <p>
+        El usuario debe proporcionar información correcta y mantener sus credenciales confidenciales.
+        La institución utilizará los datos para administrar el acceso al sistema y prestar los servicios
+        relacionados con sus funciones, no para fines ajenos a esos propósitos.
+    </p>
+    <p>
+        El acceso podrá limitarse cuando deje de ser necesario. Los datos solo podrán comunicarse a
+        terceros cuando exista autorización, sea necesario para prestar el servicio o lo exija la
+        normativa aplicable.
+    </p>
+
+    <p><strong>Nota:</strong> El Hospital de Clínicas debe revisar y aprobar este texto antes de usar el sistema con datos reales.</p>
+    <button type="button" id="cerrarPrivacidad">Cerrar</button>
+</dialog>
+
+<script src="../js/validar_login.js?v=20261020-2"></script>
 </body>
 </html>

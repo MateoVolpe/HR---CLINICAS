@@ -1,14 +1,29 @@
-// CODIGO DADO POR EL PROFESOR CARBONEL
-
-
 const formulario = document.querySelector('#inicio');
+const modalPrivacidad = document.getElementById('modalPrivacidad');
+const aceptacionDatos = document.getElementById('acepta_datos_personales');
+
+document.getElementById('enlacePrivacidad').addEventListener('click', (evento) => {
+    evento.preventDefault();
+    modalPrivacidad.showModal();
+});
+
+document.getElementById('cerrarPrivacidad').addEventListener('click', () => {
+    modalPrivacidad.close();
+});
 
 formulario.addEventListener('submit', async (e) => {
     e.preventDefault();
 
+    if (!aceptacionDatos.checked) {
+        alert('Marque la casilla de aceptación para continuar.');
+        aceptacionDatos.focus();
+        return;
+    }
+
     const datosI = new FormData();
-    datosI.append('usuario', formulario.usuario.value);
-    datosI.append('contrasenia', formulario.contrasenia.value);
+    datosI.set('usuario', formulario.elements.namedItem('usuario').value);
+    datosI.set('contrasenia', formulario.elements.namedItem('contrasenia').value);
+    datosI.set('acepta_datos_personales', '1');
 
     try {
         const respuesta = await fetch(formulario.action, {
@@ -31,10 +46,6 @@ formulario.addEventListener('submit', async (e) => {
             window.location.href = 'bienvenido_funcionario.html';
         }
     } catch (error) {
-<<<<<<< HEAD
-        alert('No se pudo conectar con el servidor.' , error);
-=======
         alert('No se pudo conectar con el servidor: ' + error.message);
->>>>>>> 99441b4e4c927d6521e06d80e5d483b225033b8b
     }
 });

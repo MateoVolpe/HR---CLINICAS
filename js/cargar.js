@@ -7,11 +7,27 @@ const inputArchivo = document.getElementById('archivo');
 const btnActualizar = document.getElementById('btnObtenerDocumentos');
 const listaDocumentos = document.getElementById('listaDocumentos');
 const preview = document.getElementById('preview');
+const resultadoQr = document.getElementById('resultadoQr');
+const codigoQr = document.getElementById('codigoQr');
+const enlaceDocumento = document.getElementById('enlaceDocumento');
 
 function mostrarMensaje(texto, tipo = 'ok') {
     if (!mensaje) return;
     mensaje.textContent = texto;
     mensaje.className = `mensaje ${tipo}`;
+}
+
+function mostrarCodigoQr(rutaDocumento) {
+    const urlDocumento = new URL(rutaDocumento, window.location.href).href;
+    codigoQr.innerHTML = '';
+    new QRCode(codigoQr, {
+        text: urlDocumento,
+        width: 200,
+        height: 200,
+        correctLevel: QRCode.CorrectLevel.M
+    });
+    enlaceDocumento.href = urlDocumento;
+    resultadoQr.hidden = false;
 }
 
 async function obtenerDocumentos() {
@@ -34,9 +50,13 @@ async function obtenerDocumentos() {
         documentos.forEach((documento) => {
             const opcion = document.createElement('option');
             opcion.value = documento.id;
+            opcion.dataset.archivo = documento.archivo;
             opcion.textContent = documento.titulo;
             listaDocumentos.appendChild(opcion);
         });
+
+        listaDocumentos.selectedIndex = 0;
+        listaDocumentos.dispatchEvent(new Event('change'));
     } catch (error) {
         console.error(error);
         mostrarMensaje('No se pudo cargar la lista de documentos.', 'error');
@@ -74,6 +94,7 @@ if (formulario) {
 
             if (resultado.exito) {
                 mostrarMensaje(resultado.mensaje, 'ok');
+                mostrarCodigoQr(resultado.url);
                 formulario.reset();
                 await obtenerDocumentos();
             } else {
@@ -96,6 +117,7 @@ if (listaDocumentos) {
         if (!idSeleccionado) {
             preview.style.display = 'none';
             preview.src = '';
+            resultadoQr.hidden = true;
             return;
         }
 
@@ -112,6 +134,7 @@ if (listaDocumentos) {
             const ruta = `../documentos/${documento.archivo}`;
             preview.src = ruta;
             preview.style.display = 'block';
+            mostrarCodigoQr(ruta);
         } catch (error) {
             console.error(error);
         }

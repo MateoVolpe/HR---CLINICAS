@@ -74,17 +74,24 @@ if (!move_uploaded_file($archivo['tmp_name'], $rutaCompleta)) {
 
 $idFuncionario = $_SESSION['id_funcionario'] ?? null;
 
+$con->begin_transaction();
+
 if ($idFuncionario !== null) {
     $sql = "INSERT INTO documentos (titulo, descripcion, archivo, id_funcionario) VALUES (?, ?, ?, ?)";
     $stmt = $con->prepare($sql);
-    $stmt->bind_param('sssi', $titulo, $descripcion, $nombreArchivo, $idFuncionario);
+    if ($stmt) {
+        $stmt->bind_param('sssi', $titulo, $descripcion, $nombreArchivo, $idFuncionario);
+    }
 } else {
     $sql = "INSERT INTO documentos (titulo, descripcion, archivo) VALUES (?, ?, ?)";
     $stmt = $con->prepare($sql);
-    $stmt->bind_param('sss', $titulo, $descripcion, $nombreArchivo);
+    if ($stmt) {
+        $stmt->bind_param('sss', $titulo, $descripcion, $nombreArchivo);
+    }
 }
 
 if (!$stmt || !$stmt->execute()) {
+    $con->rollback();
     @unlink($rutaCompleta);
     echo json_encode([
         'exito' => false,
@@ -93,11 +100,33 @@ if (!$stmt || !$stmt->execute()) {
     exit;
 }
 
+$idDocumento = $con->insert_id;
 $stmt->close();
+$basePath = rtrim(dirname(dirname($_SERVER['SCRIPT_NAME'] ?? '/php/guardar.php')), '/\\');
+$urlDocumento = ($basePath ? $basePath : '') . '/documentos/' . rawurlencode($nombreArchivo);
+$stmtQr = $con->prepare("INSERT INTO codigos_qr (codigo, id_documento) VALUES (?, ?)");
+
+if ($stmtQr) {
+    $stmtQr->bind_param('si', $urlDocumento, $idDocumento);
+}
+
+if (!$stmtQr || !$stmtQr->execute()) {
+    $con->rollback();
+    @unlink($rutaCompleta);
+    echo json_encode([
+        'exito' => false,
+        'mensaje' => 'No se pudo generar el código QR: ' . $con->error
+    ]);
+    exit;
+}
+
+$stmtQr->close();
+$con->commit();
 $con->close();
 
 echo json_encode([
     'exito' => true,
     'mensaje' => 'Documento subido correctamente.',
-    'archivo' => $nombreArchivo
+    'archivo' => $nombreArchivo,
+    'url' => $urlDocumento
 ]);
